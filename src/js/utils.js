@@ -93,31 +93,32 @@ var roundedHullN = function (polyPoints, hullPadding) {
 export function roundedHull(points) {
   var draw_contexts = getDrawContexts()
   var hullPadding = draw_contexts.hullPadding || 200
-  // var hullPadding = 0
 
   // Returns an SVG path for a rounded hull around the points
   var path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-  path.setAttribute('stroke', 'red') // Set stroke color to red
+  // path.setAttribute('stroke', 'red') // Set stroke color to red
   // If you also want to fill the path with red color, uncomment the line below
   // path.setAttribute('fill', 'red')
   if (points.length === 1) {
     path.setAttribute('d', roundedHull1(points, hullPadding))
+    path.setAttribute('fill', 'red')
   } else if (points.length === 2) {
-    path.setAttribute('d', roundedHull2(points, -1000))
+    path.setAttribute('d', roundedHull2(points, -500))
+    path.setAttribute('fill', 'red')
   } else {
     path.setAttribute('d', roundedHullN(polygonHull(points), hullPadding))
   }
   return path
 }
 
-function randomColor() {
-  const hexChars = '456789AB' // characters pool for hex color
-  let color = '#'
-  for (let i = 0; i < 6; i++) {
-    color += hexChars[Math.floor(Math.random() * hexChars.length)]
-  }
-  return color
-}
+// function randomColor() {
+//   const hexChars = '456789AB' // characters pool for hex color
+//   let color = '#'
+//   for (let i = 0; i < 6; i++) {
+//     color += hexChars[Math.floor(Math.random() * hexChars.length)]
+//   }
+//   return color
+// }
 
 function getRandomShade(colour) {
   //  Returns a random shade within a specified range
@@ -268,7 +269,7 @@ export function notes_in_range(n_ref, min_p_off, max_p_off, max_t_off) {
         console.log('in time')
         let p_off = pitch_offset(m, n_ref)
         if (p_off >= min_p_off && p_off <= max_p_off) {
-	  console.log('in pitch')
+	  // console.log('in pitch')
 	  none_added = false
 	  ns.push(m)
         }
